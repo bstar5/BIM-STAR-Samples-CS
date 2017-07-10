@@ -1,0 +1,35 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DemoApp.Views"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel>
+            <Button Content="增加一个学生" Command="{Binding AddStudent}" Width="200" Margin="5" />
+            <Button Content="修改最后一个学生的备注" Command="{Binding ModifyStudent}" Width="200" Margin="5" />
+            <Button Content="删除最后一个学生" Command="{Binding DeleteStudent}" Width="200" Margin="5" />
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="500" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="RadGridView控件：" FontSize="20" Margin="5" />
+            <telerik:RadGridView Grid.Column="1" AutoGenerateColumns="False" SelectionMode="Single" ShowGroupPanel="False" IsFilteringAllowed="True"
+                             RowIndicatorVisibility="Collapsed" CanUserFreezeColumns="False" IsReadOnly="False" CanUserSortColumns="True"
+                             ItemsSource="{Binding UserSource,Mode=TwoWay}" SelectedItem="{Binding SelectedUserItem}" Margin="0,10,10,10">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Header="序号" DataMemberBinding="{Binding Number}" />
+                    <telerik:GridViewDataColumn Header="姓名" DataMemberBinding="{Binding Name}" />
+                    <telerik:GridViewDataColumn Header="备注" DataMemberBinding="{Binding Remark}" />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </Grid>
+        <TextBlock Text="{Binding TextBlockTest}" FontSize="30"  Margin="5" />
+    </StackPanel>
+</mango:ViewBase>

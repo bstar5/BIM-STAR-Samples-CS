@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tab Name = "MyTab" Header="我的菜单">
+  <Group Name = "MyFirstGroup" Header="我的菜单组">
+    <Button Text = "我的按钮" ButtonSize="Large" CollapseToMedium="Never" LargeImage="logo.jpg" SmallImage="logo.jpg" Click="ShowPane" />
+  </Group>
+</Tab>

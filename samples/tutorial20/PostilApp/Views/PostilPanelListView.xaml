@@ -1,0 +1,99 @@
+﻿<mango:ViewBase x:Class="PostilApp.Views.PostilPanelListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PostilApp.Views"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:converters="clr-namespace:Mango.Converters;assembly=Mango.Wpf"
+             xmlns:controls="clr-namespace:Mango.Controls;assembly=Mango.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <mango:ViewBase.Resources>
+        <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="ItemBorder" Margin="10,10,10,0" Cursor="Hand" BorderThickness="1" BorderBrush="{Binding AlternativeBrush,Source={x:Static mango:M.ThemeManager}}"
+                                Background="{Binding AlternativeBrush,Source={x:Static mango:M.ThemeManager}}">
+                            <Grid MinWidth="360" Height="70" Background="{Binding AlternativeBrush, Source={x:Static mango:M.ThemeManager}}" ToolTip="单击：图形平台则定位到批注位置。双击：查看批注详情。">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="TitleTextBlock" Text="{Binding Title}" Margin="5" TextTrimming="CharacterEllipsis"  TextWrapping="NoWrap"
+                                           FontSize="{Binding FontSizeL ,Source={x:Static mango:M.ThemeManager}}" />
+                                <ToggleButton Grid.Row="1" Grid.Column="0" x:Name="TagToggleButton" Margin="5,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="Auto" Content="{Binding FirstTag , Mode=TwoWay}" Foreground="#ffffff">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                            <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                                <ContentPresenter Margin="3" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="Background" Value="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                                </Trigger>
+                                                <Trigger Property="IsChecked" Value="False">
+                                                    <Setter Property="Background" Value="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LastTime}" x:Name="LastTimeTextBlock" Foreground="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,0"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding PostilUser}" x:Name="PostilUserTextBlock" Foreground="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,0,15,0"></TextBlock>
+                                <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"  mango:RemoteImageEx.UriSource="{Binding ImageUrl}" Stretch="Fill" Width="70" Height="70" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" TargetName="TitleTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Background" TargetName="TagToggleButton" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Foreground" TargetName="LastTimeTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Foreground" TargetName="PostilUserTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderThickness" TargetName="ItemBorder" Value="1" />
+                                <Setter Property="BorderBrush" TargetName="ItemBorder" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Foreground" TargetName="TitleTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Background" TargetName="TagToggleButton" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Foreground" TargetName="LastTimeTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Foreground" TargetName="PostilUserTextBlock" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <converters:BoolToVisibilityCvt x:Key="BoolToVisibilityCvt" />
+    </mango:ViewBase.Resources>
+    <Grid PreviewMouseLeftButtonDown="Grid_OnPreviewMouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <controls:GeometryButton Command="{Binding Refresh}" ToolTip="刷新" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                     Data="M29.999994,0C30.552994,-1.1920929E-07,30.999992,0.44799932,30.999992,0.99999857L30.999992,11.001986 20.860006,11.001986C20.308006,11.001986 19.860008,10.553987 19.860008,10.001987 19.860008,9.4499875 20.308006,9.0019885 20.860006,9.0019885L27.879488,9.0019885 27.646961,8.6472083C25.062847,4.8487974 20.721582,2.5409786 16,2.5409784 8.2799683,2.5409786 2,8.6999723 2,16.270983 2,23.840987 8.2799683,29.99998 16,29.99998 23.719971,29.99998 30,23.840987 30,16.270983 30,15.717974 30.447021,15.270984 31,15.270984 31.552979,15.270984 32,15.717974 32,16.270983 32,24.943982 24.822021,31.99998 16,31.99998 7.1779785,31.99998 0,24.943982 0,16.270983 0,7.5969759 7.1779785,0.54097956 16,0.54097939 21.202736,0.54097956 26.005089,3.0001701 28.98875,7.0798002L28.999996,7.0957452 28.999996,0.99999857C28.999996,0.44799932,29.446995,-1.1920929E-07,29.999994,0z" />
+            <controls:SearchBox BorderBrush="Transparent" BorderThickness="0" Grid.Column="1"
+                                Text="{Binding SearchText,Mode=TwoWay}" SearchFunc="{Binding Search}" />
+        </Grid>
+        <controls:MetroProgressBar Grid.Row="1" Height="5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom"
+                                   IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityCvt}}" />
+        <ListBox Name="ListBox"  Grid.Row="2" ItemsSource="{Binding PostilInfoModels ,Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedPostilInfoModel}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                 mango:Mvvm.Attach="MouseDoubleClick=OnMouseDoubleClick()" Background="Transparent">
+        </ListBox>
+    </Grid>
+</mango:ViewBase>

@@ -1,0 +1,20 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500">
+    <StackPanel>
+        <Button Content="调用->属性应用的打开属性面板服务" Command="{Binding OpenPropertyPane}" Width="300" Margin="5" />
+        <Button Content="注册自身提供的服务" Command="{Binding RegisterService}" Width="300"  Margin="5" />
+        <Button Content="调用->自身提供的DemoApp:Show服务" Command="{Binding DemoAppShow}" Width="300"  Margin="5" />
+        <Button Content="调用->自身提供的DemoApp:Hide服务" Command="{Binding DemoAppHide}" Width="300"  Margin="5" />
+        <Grid Height="1" Background="DarkGray" Margin="10" />
+        <Button Content="注册自身提供的插槽" Command="{Binding RegisterSlot}" Width="300"  Margin="5" />
+        <Button Content="注册插槽DemoApp:Startup中的插头FirstPlug" Command="{Binding RegisterPlug}" Width="300"  Margin="5" />
+        <Button Content="执行->插槽DemoApp:Startup中的插头FirstPlug" Command="{Binding ExecutePlugs}" Width="300"  Margin="5" />
+    </StackPanel>
+</mango:ViewBase>

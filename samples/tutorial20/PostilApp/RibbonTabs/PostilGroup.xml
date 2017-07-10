@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Group Name="PostilGroup" Header="批注">
+  <Button Text="添加批注" ButtonSize="Large" CollapseToMedium="Never" LargeImage="添加批注.png" SmallImage="添加批注16.png" Click="OpenAddPostilView" />
+  <Button Text="查看批注" ButtonSize="Large" CollapseToMedium="Never" LargeImage="查看批注.png" SmallImage="查看批注16.png" Click="OpenCheckPostilView" />
+  <Button Text="批注列表" ButtonSize="Large" CollapseToMedium="Never" LargeImage="批注列表.png" SmallImage="批注列表16.png" Click="OpenPostilListView" />
+</Group>

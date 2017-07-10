@@ -1,0 +1,197 @@
+﻿<mango:ViewBase x:Class="PostilApp.Views.CheckPostilsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PostilApp.Views"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:controls="clr-namespace:Mango.Controls;assembly=Mango.Wpf"
+             xmlns:converters="clr-namespace:Mango.Converters;assembly=Mango.Wpf"
+             xmlns:converters1="clr-namespace:PostilApp.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="1200">
+    <mango:ViewBase.Resources>
+        <Style x:Key="NofocusButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush></ImageBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <converters:BoolToVisibilityCvt x:Key="BoolToVisibilityCvt" />
+        <converters1:NullToImageCvt x:Key="NullToImageCvt" />
+        <converters1:IsEnabledToOpacityCvt x:Key="IsEnabledToOpacityCvt" />
+        <ItemsPanelTemplate x:Key="ListBoxItemPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+        <Style x:Key="TagListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="PictureListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="ImgBorder" Margin="0,0,5,5" BorderThickness="1" BorderBrush="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" Background="{Binding AlternativeBrush,Source={x:Static mango:M.ThemeManager}}">
+                            <Grid Background="{Binding AlternativeBrush,Source={x:Static mango:M.ThemeManager}}">
+                                <Image Margin="1" Height="60" Width="60" Stretch="UniformToFill" UseLayoutRounding="True" mango:RemoteImageEx.UriSource="{Binding ImageUrl}" />
+                                <controls:GeometryButton  x:Name="DeleteBtn" Margin="1" mango:Mvvm.Attach="Click=OnDeletePostilItem($dataContext)" ToolTip="删除批注"
+                                                          HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed"
+                                                          Data="M8.1874104,6.1679997L10.6685,8.6483784 13.14739,6.1679997 15.165001,8.1874561 12.68601,10.666565 15.165001,13.148173 13.14739,15.165 10.6685,12.68469 8.1855507,15.165 6.1679997,13.148173 8.6489697,10.666565 6.1698899,8.1874561z M10.666551,2.4205558C6.1112442,2.4205558 2.4193058,6.1119142 2.4193058,10.666551 2.4193058,15.221186 6.1112442,18.912535 10.666551,18.912535 15.219286,18.912535 18.911236,15.221186 18.911236,10.666551 18.911236,6.1119142 15.219286,2.4205558 10.666551,2.4205558z M10.666551,0C16.546768,0 21.333,4.7850928 21.333,10.666551 21.333,16.547968 16.546768,21.333 10.666551,21.333 4.7837729,21.333 0,16.547968 0,10.666551 0,4.7850928 4.7837729,0 10.666551,0z" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush"  TargetName="ImgBorder" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Visibility" TargetName="DeleteBtn" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderBrush"  TargetName="ImgBorder" Value="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                <Setter Property="Visibility" TargetName="DeleteBtn" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </mango:ViewBase.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="600" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="860" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Stretch">
+            <controls:MetroProgressBar Height="5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom"
+                                       IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityCvt}}" />
+        </Grid>
+        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}">
+            <Grid Name="ImageShow" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <controls:ZoomBorder x:Name="imgZoom"  ClipToBounds="True"   ToolTip="鼠标滚动可以缩放、按住拖动">
+                    <Image Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" mango:RemoteImageEx.UriSource="{Binding BigPictureUrl,Converter={StaticResource NullToImageCvt}}" Stretch="Uniform" />
+                </controls:ZoomBorder>
+                <Button MaxHeight="28" MaxWidth="28" ToolTip="上一张图片" BorderThickness="0"
+                        HorizontalAlignment="Left" VerticalAlignment="Stretch" Command="{Binding PreviousPicture}"
+                        Style="{DynamicResource NofocusButton}" Visibility="{Binding ElementName=ImageShow,Path=IsMouseOver,Converter={StaticResource BoolToVisibilityCvt}}"
+                        Margin="20,0,0,0" Opacity="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource IsEnabledToOpacityCvt}}">
+                    <Viewbox>
+                        <Path   Data="M299.152955025434,0L496.426178902388,0 268.890046089888,280.247772216797 198.190201729536,367.407897949219 199.87503144145,369.495361328125 271.502137154341,457.706451416016 498.999970406294,738 301.717621773481,738 101.234124153852,491.008697509766 99.5304498374462,488.936553955078 98.6409082114697,490.003173828125 0,368.488952636719 98.6409082114697,246.945526123047z"
+                            Stretch="Uniform" Fill="{Binding Source={x:Static mango:M.ThemeManager},Path=AccentBrush}" />
+                    </Viewbox>
+                </Button>
+                <Button MaxHeight="28" MaxWidth="28" ToolTip="下一张图片"
+                        BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"  Command="{Binding NextPicture}"
+                        Style="{DynamicResource NofocusButton}" Visibility="{Binding ElementName=ImageShow,Path=IsMouseOver,Converter={StaticResource BoolToVisibilityCvt}}"
+                        Margin="0,0,20,0" Opacity="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource IsEnabledToOpacityCvt}}">
+                    <Viewbox>
+                        <Path   Data="M0,0L197.27686,0 397.76401,246.9906 399.46771,249.06265 400.3573,247.99635 498.99997,369.51013 400.3573,491.05371 199.85071,738 2.5647115,738 230.11415,457.75143 300.80618,370.59119 299.12131,368.50436 227.49289,280.29288z"
+                            Stretch="Uniform" Fill="{Binding Source={x:Static mango:M.ThemeManager},Path=AccentBrush}" />
+                    </Viewbox>
+                </Button>
+                <controls:GeometryButton  Margin="5"  VerticalAlignment="Top" Command="{Binding Refresh}" HorizontalAlignment="Right"  ToolTip="刷新" Data="M29.999994,0C30.552994,-1.1920929E-07,30.999992,0.44799932,30.999992,0.99999857L30.999992,11.001986 20.860006,11.001986C20.308006,11.001986 19.860008,10.553987 19.860008,10.001987 19.860008,9.4499875 20.308006,9.0019885 20.860006,9.0019885L27.879488,9.0019885 27.646961,8.6472083C25.062847,4.8487974 20.721582,2.5409786 16,2.5409784 8.2799683,2.5409786 2,8.6999723 2,16.270983 2,23.840987 8.2799683,29.99998 16,29.99998 23.719971,29.99998 30,23.840987 30,16.270983 30,15.717974 30.447021,15.270984 31,15.270984 31.552979,15.270984 32,15.717974 32,16.270983 32,24.943982 24.822021,31.99998 16,31.99998 7.1779785,31.99998 0,24.943982 0,16.270983 0,7.5969759 7.1779785,0.54097956 16,0.54097939 21.202736,0.54097956 26.005089,3.0001701 28.98875,7.0798002L28.999996,7.0957452 28.999996,0.99999857C28.999996,0.44799932,29.446995,-1.1920929E-07,29.999994,0z" />
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <TextBlock Text="标      题" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" />
+                    <TextBlock Text="{Binding PostilTitle}" Margin="10,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </StackPanel>
+                <Grid Height="1" VerticalAlignment="Center" Opacity="0.3" Background="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <TextBlock Text="时      间" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" />
+                    <TextBlock Text="{Binding PostilTime,StringFormat=yyyy-MM-dd HH:mm:ss}" Margin="10,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </StackPanel>
+                <Grid Height="1" VerticalAlignment="Center" Opacity="0.3" Background="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <TextBlock Text="创 建 人" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" />
+                    <TextBlock Text="{Binding PostilFounder , Mode=TwoWay}" Margin="10,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </StackPanel>
+                <Grid Height="1" VerticalAlignment="Center" Opacity="0.3" Background="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <TextBlock Text="是否公开" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" />
+                    <TextBlock Text="{Binding PublicOrPrivate , Mode=TwoWay}" Margin="10,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </StackPanel>
+                <Grid Height="1" VerticalAlignment="Center" Opacity="0.3" Background="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="标      签" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" />
+                    <ListBox Name="TagListBox" Grid.Column="1" Margin="10,5,5,5" ItemsPanel="{StaticResource ListBoxItemPanelTemplate}"
+                             ItemsSource="{Binding ListTag}" ItemContainerStyle="{DynamicResource TagListBoxItemStyle}"
+                             Background="Transparent" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Left"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <ToggleButton Margin="5" Height="25" Width="Auto" MaxWidth="200" Foreground="White" Content="{Binding Name , Mode=TwoWay}">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                            <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                                <ContentPresenter Margin="3" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="Background" Value="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                                </Trigger>
+                                                <Trigger Property="IsChecked" Value="False">
+                                                    <Setter Property="Background" Value="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <Grid Height="1" VerticalAlignment="Center" Opacity="0.3" Background="{Binding BasicBrush,Source={x:Static mango:M.ThemeManager}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="其他批注" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Opacity="0.6" TextTrimming="WordEllipsis" TextAlignment="Left" Margin="0,0,0,10" />
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox  BorderThickness="0" Name="ListBoxImage" ItemsSource="{Binding ViewPictureModels}" SelectedItem="{Binding SelectedViewPicModel}"
+                          Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsPanel="{StaticResource ListBoxItemPanelTemplate}"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource PictureListBoxItemStyle}">
+                    </ListBox>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <!--<StackPanel Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="删除" Command="{Binding DeletePostil}" Foreground="White" Height="30" Width="100" Margin="5" Background="{Binding AccentBrush,Source={x:Static mango:M.ThemeManager}}"></Button>
+            <Button Content="关闭" Command="{Binding CancleDeletePostil}"  Height="30" Width="100" Margin="15,5,15,5"></Button>
+        </StackPanel>-->
+    </Grid>
+</mango:ViewBase>

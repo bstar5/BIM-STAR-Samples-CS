@@ -1,0 +1,36 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500">
+    <Grid>
+        <StackPanel>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="添加一些学生数据到自定义新表" Command="{Binding AddData}" Width="300" Margin="5" />
+                <Button Grid.Row="1" Content="为自定义新表创建索引（学号）" Command="{Binding CreateIndex}" Width="300"  Margin="5" />
+                <Button Grid.Row="2" Content="删除最后一个学生数据" Command="{Binding DeleteData}" Width="300"  Margin="5" />
+                <Button Grid.Row="3" Content="修改最后一个学生的备注信息" Command="{Binding UpdateData}" Width="300"  Margin="5" />
+                <telerik:RadGridView Name="GridView" Grid.Row="4" AutoGenerateColumns="False" SelectionMode="Single" ShowGroupPanel="False" IsFilteringAllowed="False"
+                             RowIndicatorVisibility="Collapsed" CanUserFreezeColumns="False" IsReadOnly="True" ShowColumnSortIndexes="True"
+                             ItemsSource="{Binding UserSource}" SelectedItem="{Binding SelectedUserItem}" Margin="5">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="学号" DataMemberBinding="{Binding Number}" />
+                        <telerik:GridViewDataColumn Header="姓名" DataMemberBinding="{Binding Name}" />
+                        <telerik:GridViewDataColumn Header="备注" DataMemberBinding="{Binding Remark}" />
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</mango:ViewBase>

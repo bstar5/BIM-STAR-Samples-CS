@@ -1,0 +1,22 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DemoApp.Views"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="点击控制下面两个按钮控制它们前面的选择框" Margin="5" />
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="5">选择框</CheckBox>
+                <Button Content="按钮（非异步）" Command="{Binding ButtonCmd}" Margin="5" />
+                <Button Content="按钮（异步）" Command="{Binding ButtonCmdAsync}" Margin="5" />
+            </StackPanel>
+            <Button Content="执行全局命令（非异步）" Command="{Binding GlobalCommand}" Margin="0,5"></Button>
+            <Button Content="执行全局命令（异步）" Command="{Binding GlobalCommandAsync}" Margin="0,5"></Button>
+        </StackPanel>
+    </Grid>
+</mango:ViewBase>

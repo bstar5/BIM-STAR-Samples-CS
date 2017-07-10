@@ -1,0 +1,38 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500">
+    <Grid>
+        <StackPanel>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="发送一条ViewModel到View的通知(类型为string)" Command="{Binding ButtonOneClick}" Width="300" Margin="5" />
+                <Button Grid.Row="1" Content="发送一条ViewModel到View的通知(类型为实体)" Command="{Binding ButtonTwoClick}" Width="300"  Margin="5" />
+                <Button Grid.Row="2" Content="发送一条View到ViewModel的通知(类型为string)" Click="ButtonThree_OnClick" Width="300"  Margin="5" />
+                <Button Grid.Row="3" Content="发送一条View到ViewModel的通知(类型为实体)" Click="ButtonFour_OnClick" Width="300"  Margin="5" />
+                <Button Grid.Row="4" FontSize="20" Content="{Binding MouseToButtonText}" mango:Mvvm.Attach="MouseEnter=MouseEnter();MouseLeave=MouseLeave()" Width="300" Height="300"  Margin="5" />
+                <telerik:RadGridView Name="GridView" Grid.Row="5" AutoGenerateColumns="False" SelectionMode="Single" ShowGroupPanel="False" IsFilteringAllowed="False"
+                             RowIndicatorVisibility="Collapsed" CanUserFreezeColumns="False" IsReadOnly="True" ShowColumnSortIndexes="True"
+                             ItemsSource="{Binding UserSource}" SelectedItem="{Binding SelectedUserItem}" Margin="5">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="序号" DataMemberBinding="{Binding Number}" />
+                        <telerik:GridViewDataColumn Header="姓名" DataMemberBinding="{Binding Name}" />
+                        <telerik:GridViewDataColumn Header="备注" DataMemberBinding="{Binding Remark}" />
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</mango:ViewBase>
