@@ -1,3 +1,0 @@
-# BSTAR-Samples-New
-
-test
