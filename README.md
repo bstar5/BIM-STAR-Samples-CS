@@ -1,4 +1,4 @@
-# BSTAR-Samples
+# BIM-STAR-Samples-CS
 
 ## Introduction
 
