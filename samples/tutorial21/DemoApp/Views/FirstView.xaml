@@ -1,0 +1,27 @@
+﻿<mango:ViewBase x:Class="DemoApp.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DemoApp.Views"
+             xmlns:mango="clr-namespace:Mango;assembly=Mango.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="300">
+    <StackPanel>
+        <Button Content="截图功能" Command="{Binding CaptureScreen}" Margin="5" />
+        <Button Content="获取摄像机位置矩阵" Command="{Binding GetCameraMatrix}" Margin="5" />
+        <Button Content="设置摄像机位置矩阵" Command="{Binding SetCameraMatrix}" Margin="5" />
+        <Button Content="插入图片" Command="{Binding InsertImage}" Margin="5" />
+        <Button Content="移除图片" Command="{Binding RemoveImage}" Margin="5" />
+        <Button Content="定位到指定节点" Command="{Binding LocateNodes}" Margin="5" />
+        <Button Content="突出显示选中的节点" Command="{Binding OutstandSelectedNodes}" Margin="5" />
+        <Button Content="暂停渲染" Command="{Binding PauseRender}" Margin="5" />
+        <Button Content="进入到选择构件模式" Command="{Binding SelectNodes}" Margin="5" />
+        <Button Content="进入到选择点模式" Command="{Binding SelectPoint}" Margin="5" />
+        <Button Content="进入到提醒模式" Command="{Binding GoToRemindMode}" Margin="5" />
+        <Button Content="进入到默认模式" Command="{Binding GoToDefaultMode}" Margin="5" />
+        <Button Content="获取图形平台的目标点" Command="{Binding GetTargetCenter}" Margin="5" />
+        <Button Content="显示图钉" Command="{Binding ShowThumbtack}" Margin="5" />
+        <Button Content="移除图钉" Command="{Binding RemoveThumbtack}" Margin="5" />
+    </StackPanel>
+</mango:ViewBase>
