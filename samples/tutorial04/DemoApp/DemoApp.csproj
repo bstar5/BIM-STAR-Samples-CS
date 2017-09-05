@@ -59,6 +59,7 @@
     <Compile Include="RibbonExample.cs" />
     <Compile Include="ViewModels\RibbonTabs\ViewButtonViewModel.cs" />
     <Compile Include="ViewModels\RibbonTabs\ViewGroupViewModel.cs" />
+    <Compile Include="ViewModels\RibbonTabs\RibbonTypeTabViewModel.cs" />
     <Compile Include="ViewModels\RibbonTabs\ViewTabViewModel.cs" />
     <Compile Include="Views\FirstView.xaml.cs">
       <DependentUpon>FirstView.xaml</DependentUpon>
@@ -84,6 +85,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="RibbonTabs\ViewGroup.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RibbonTabs\RibbonTypeTab.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="RibbonTabs\ViewTab.xml">

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tab Header="所有的Ribbon菜单类型" Name = "RibbonTab">
+  <Group Header="Group1" Name="Group1">
+    <Button Text="Button" ButtonSize="Large" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ShowWindow" />
+    <Separator Height="100" Width="2" />
+    <Button Text="Button" Content="按钮" Click="ShowWindow" />
+    <Panel GroupType="Collapsible">
+      <RadioButton Text="RadioButton1" Name="RadioButton1" GroupName="RadioButtonGroup" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ChangeRadioButton" />
+      <RadioButton Text="RadioButton2" Name="RadioButton2" GroupName="RadioButtonGroup" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ChangeRadioButton" />
+      <RadioButton Text="RadioButton3" Name="RadioButton3" GroupName="RadioButtonGroup" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ChangeRadioButton" />
+    </Panel>
+    <DropDownButton Text="方向" ButtonSize="Large"  LargeImage="测试图片.png" SmallImage="测试图片16.png">
+      <ContextMenu>
+        <ContextMenuItem Header="上" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="下" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="左" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="右" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <MenuGroupItem />
+        <ContextMenuItem Header="东" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="南" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="西" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+        <ContextMenuItem Header="北" Icon="测试图片16.png" Click="ChangeContextMenuItem" />
+      </ContextMenu>
+    </DropDownButton>
+    <DropDownButton Text="选项" ButtonSize="Large" LargeImage="测试图片.png" SmallImage="测试图片16.png">
+      <ContextMenu>
+        <ContextMenuItem Header="透明度" Icon="测试图片.png">
+          <ContextMenuItem Header="默认" IsCheckable="True" IsChecked="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="半透明" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+        </ContextMenuItem>
+        <ContextMenuItem Name="BgColorMenuItem" Header="背景颜色" Icon="测试图片.png">
+          <ContextMenuItem Header="白色" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="灰色" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="蓝色" IsCheckable="True" IsChecked="True" GroupName="1" Click="ChangeContextMenuItem" />
+        </ContextMenuItem>
+      </ContextMenu>
+    </DropDownButton>
+    <Panel GroupType="StackPanel" Orientation="Vertical" Margin="2,0,0,0">
+      <Label Text="速度" Margin="3" />
+      <NumericUpDown Minimum="0.1" Maximum="100000" Digits="1" Unit="m/s" SmallChange="0.1" LargeChange="1"
+                     Width="110" Value="5" ValueChanged="SpeedChanged" ScreenTipTitle="速度" ScreenTipDescription="设置速度，取值范围为0.1m/s至100000m/s" />
+    </Panel>
+    <SplitButton IsToggle="True" IsChecked="True" IsTextInMiddleButton="True" Text="SplitButton" ButtonSize="Large" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ShowWindow">
+      <ContextMenu>
+        <ContextMenuItem Header="透明度" Icon="测试图片.png">
+          <ContextMenuItem Header="默认" IsCheckable="True" IsChecked="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="半透明" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+        </ContextMenuItem>
+        <ContextMenuItem Name="BgColorMenuItem" Header="背景颜色" Icon="测试图片.png">
+          <ContextMenuItem Header="白色" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="灰色" IsCheckable="True" GroupName="1" Click="ChangeContextMenuItem" />
+          <ContextMenuItem Header="蓝色" IsCheckable="True" IsChecked="True" GroupName="1" Click="ChangeContextMenuItem" />
+        </ContextMenuItem>
+      </ContextMenu>
+    </SplitButton>
+    <ToggleButton Text="ToggleButton" ButtonSize="Large" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" Click="ToggleButtonClick" />
+    <ColorPicker Header="选取颜色" Color="Red" CollapseToMedium="Never" LargeImage="测试图片.png" SmallImage="测试图片16.png" ColorChanged="ColorChanged" />
+    <ComboBox Name="FontFamilyBox" Width="100" SelectedItemChanged="OnComboBoxSelectedItemChanged">
+      <String>Arial</String>
+      <String>Microsoft YaHei</String>
+      <String>黑体</String>
+      <String>宋体</String>
+    </ComboBox>
+    <DatePicker Header="日期" DateTimeChanged="DateTimeChanged" />
+    <Gallery Icon="测试图片.png" SelectedItemChanged="GallerySelectedItemChanged">
+      <GalleryItem Image="测试图片.png" Name="第1项" />
+      <GalleryItem Image="测试图片.png" Content="第2项" Name="第2项" />
+      <GalleryItem Content="第3项" Name="第3项" />
+      <GalleryItem Content="第4项" Name="第4项" />
+      <GalleryItem Content="第5项" Name="第5项" />
+      <GalleryItem Content="第6项" Name="第6项" />
+    </Gallery>
+    <ListGallery>
+      <GalleryItem Image="测试图片.png" Name="第1项" />
+      <GalleryItem Image="测试图片.png" Content="第2项" Name="第2项" />
+      <GalleryItem Content="第3项" Name="第3项" />
+      <GalleryItem Content="第4项" Name="第4项" />
+      <GalleryItem Content="第5项" Name="第5项" />
+      <GalleryItem Content="第6项" Name="第6项" />
+    </ListGallery>
+    <Slide Header="滑动" Width="200" Minimum="0" Maximum="100" Value="50" ShowHandles="True" SmallChange="1" LargeChange="10" ValueChanged="ValueChanged" />
+    <TextBox Text="文本框" TextChanged="TextChanged" />
+  </Group>
+</Tab>

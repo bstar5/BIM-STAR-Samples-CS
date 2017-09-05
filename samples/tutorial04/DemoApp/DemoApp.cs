@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DemoApp.ViewModels;
 using DemoApp.ViewModels.RibbonTabs;
 using Mango;
@@ -50,6 +51,16 @@ namespace DemoApp
             //因此只能通过外层加上<Group>标签,通过继承RibbonGroupViewModel去解析XML，然后得到Group里的Button组
             _xmlGroup = Mg.Get<IMgRibbon>().GetRibbonGroup(_xmlGroup.Name);
             _xmlGroup.Items.AddRange(_xmlGroupTwo.Items);
+
+            /*******************采用Xml方式展示所有的Ribbon菜单基本控件************************/
+            Mg.Get<IMgRibbon>().InsertRibbonTab(this, new RibbonTypeTabViewModel(), 2);
+            //插入返回页的项
+            Mg.Get<IMgRibbon>().InsertBackstageItem(this, new RibbonBackstageItemViewModel
+            {
+                Header = "新添加的项",
+                Content = new FirstViewModel(),
+                IsSelectable = true,
+            });
             await Task.Yield();
         }
 
